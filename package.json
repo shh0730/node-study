@@ -1,0 +1,16 @@
+{
+  "name": "node-study",
+  "version": "1.0.0",
+  "description": "class101 령몽",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "reimu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "supervisor": "^0.12.0"
+  }
+}
