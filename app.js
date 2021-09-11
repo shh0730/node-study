@@ -4,15 +4,16 @@ const express = require('express');
 const helmet = require('helmet'); //npmjs.com 에서 가져옴 helet >> 최소한의 보안도구 (npm install helmet으로 도구 설치)
 const app = express();
 const ejs = require('ejs');
+const db = require('./model/db')
 
 
 //css, html을 어떻게 꺼내는지(브라우저에 띄우기 위해)
 app.set('view engine', 'ejs'); //ejs 다운로드 해야하는 도구(npm install ejs), 뷰엔진 옆에 ejs는 확장자를 ejs로 사용하겠다라는 뜻(확장자를 ejs로 바꿔줘야함)
 app.set('views', './views');
 app.use('/public', express.static(__dirname + '/public'));
-//css와 image파일을 꺼낼때는 항상 public에서 꺼내라 라는 규칙을 만든것
+//리로스파일(css와 image파일, 자바스크립트 파일 등)을 꺼낼때는 항상 public에서 꺼내라 라는 규칙을 만든것
 
-app.use(helmet()); //middelware() 미들웨어, 요청과 응답사이
+// app.use(helmet()); //middelware() 미들웨어, 요청과 응답사이  (컨트롤 + / 주석처리)
                             //(사이트 ----> 요청 --middleware()--> Node.js = local:3000/about
                        //ex)  local:3000 ----> / --middleware()--> about)
 app.use(express.json());
@@ -55,6 +56,8 @@ app.get("/about", function(req,res){
 
 //서버를 켜주는 스위치(listen) ex) pc의 전원
 app.listen(3000, function(req,res){
+
+    db.sequelize.sync({force:false})
     console.log("서버 온라인")
 })
 /*
